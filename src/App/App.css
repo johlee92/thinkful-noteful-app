@@ -1,0 +1,6 @@
+.App .results {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    /* border: solid 1px red; */
+}

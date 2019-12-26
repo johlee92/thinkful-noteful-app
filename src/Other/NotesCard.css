@@ -1,0 +1,10 @@
+.NotesCard {
+    border: 1px solid black;
+    padding: 2px;
+    Margin: 2px;
+    width: 90%;
+}
+
+.NotesCard > .button {
+    left: 0;
+}
