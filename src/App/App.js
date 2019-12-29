@@ -32,7 +32,7 @@ class App extends React.Component {
 
     return(
       <main className='App'>
-        <Link to='/'>Noteful</Link>
+        <Nav />
         <Route
           exact path ='/'
           render={(routerProps) => 

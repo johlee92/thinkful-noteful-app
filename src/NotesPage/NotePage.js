@@ -1,6 +1,7 @@
 import React from 'react';
 import NotesCard from '../Other/NotesCard';
 import dummyStores from '../dummy-store';
+import './NotePage.css';
 
 class NotePage extends React.Component {
     constructor(props) {
@@ -8,22 +9,24 @@ class NotePage extends React.Component {
         console.log(props);
     }
 
+    navigateBack = () => {
+        this.props.history.goBack();
+    }
+
     render() {
         const specificNote = dummyStores.notes.find((note) =>
             note.id === this.props.match.params.noteId
         )
-        
-        console.log()
 
-        // let specificNote = dummyStores.notes.filter((note) => {
-        //     return note.id === this.state.note
-        // })
-          
+        const specificFolder = dummyStores.folders.find((folder) =>
+            folder.id === specificNote.folderId
+        )
+        
         return (
             <div className='NotePage'>
-                <div>
-                    <p>Go Back</p>
-                    {specificNote.folderId}
+                <div style={{display:'inline-block'}}>
+                    <button onClick={this.navigateBack} style={{cursor:'pointer'}}>Go Back</button>
+                    <p>Folder: {specificFolder.name}</p>
                 </div>
                 <NotesCard
                     name={specificNote.name}

@@ -1,6 +1,7 @@
 import React from 'react';
 import './NotesCard.css';
 import {Route, Link} from 'react-router-dom';
+import Moment from 'react-moment';
 
 class NotesCard extends React.Component {
     constructor(props) {
@@ -9,11 +10,18 @@ class NotesCard extends React.Component {
 
     render() {
         return (
-            <div className="NoteCard" key={this.props.id} id={this.props.id} onClick={(e) => this.props.handleNote(e.target.id)}>
+            <div 
+                className="NotesCard"
+                key={this.props.id}
+                id={this.props.id}
+                onClick={(e) => this.props.handleNote(e.target.id)}
+            >
                 <Link to={`/note/${this.props.id}`}>
                     {this.props.name}
                 </Link>
-                {this.props.modified}
+                <Moment format="YYYY/MM/DD">
+                    {this.props.modified}
+                </Moment>
                 <button>Delete</button>
             </div>
         )

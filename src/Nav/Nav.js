@@ -1,5 +1,6 @@
 import React from 'react';
 import './Nav.css';
+import { Link } from 'react-router-dom';
 
 class Nav extends React.Component {
     constructor(props) {
@@ -9,7 +10,7 @@ class Nav extends React.Component {
     render() {
         return (
             <div className="Nav">
-                Noteful
+                <Link to='/'>Noteful</Link>
             </div>
         )
     }
