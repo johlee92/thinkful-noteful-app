@@ -1,23 +1,21 @@
 import React from 'react';
 import Sidebar from '../Other/Sidebar';
 import Notes from '../Other/Notes';
+import NotefulContext from '../App/NotefulContext';
 
 class AllNotesPage extends React.Component {
     constructor(props) {
         super(props);
-        console.log(props);
     }
+
+    static contextType = NotefulContext;
 
     render() {
         return (
             <div className='AllNotesPage results'>
-                <Sidebar
-                    folders={this.props.folders}
-                    handleFolder={this.props.handleFolder}
-                />
+                <Sidebar/>
                 <Notes
-                    notes={this.props.notes}
-                    handleNote={this.props.handleNote}
+                    notes={this.context.notes}
                 />
             </div>
         )

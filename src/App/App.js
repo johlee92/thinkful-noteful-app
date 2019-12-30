@@ -6,6 +6,7 @@ import { Route } from 'react-router-dom';
 import AllNotesPage from '../AllNotesPage/AllNotesPage';
 import FolderPage from '../FolderPage/FolderPage';
 import NotePage from '../NotesPage/NotePage';
+import NotefulContext from './NotefulContext';
 
 class App extends React.Component {
   constructor(props) {
@@ -32,41 +33,55 @@ class App extends React.Component {
 
   render() {
 
+    const contextValue = {
+      folders: this.state.folders,
+      notes: this.state.notes,
+      // addFolder: () => {},
+      // deleteNote: () => {},
+      setFolder: this.setFolder,
+      setNote: this.setNote,
+    }
+
     return(
       <main className='App'>
-        <Nav />
-        <Route
-          exact path ='/'
-          render={(routerProps) => 
-            <AllNotesPage 
-              folders={this.state.folders}
-              notes={this.state.notes}
-              handleFolder={this.setFolder}
-              handleNote={this.setNote}
-              {...routerProps}
-            />}
-        />
-        <Route
-          path='/folder/:folderId'
-          render={(routerProps) =>
-            <FolderPage
-              folders={this.state.folders}
-              notes={this.state.notes}
-              handleFolder={this.setFolder}
-              handleNote={this.setNote}
-              {...routerProps}
-            />}
-        />
-        <Route
-          path='/note/:noteId'
-          render={(routerProps) =>
-            <NotePage
-              folders={this.state.folders}
-              notes={this.state.notes}
-              handleNote={this.setNote}
-              {...routerProps}
-            />}
-        />
+        <NotefulContext.Provider value={contextValue}>
+          <Nav />
+          <Route
+            exact path ='/'
+            component={AllNotesPage}
+            // render={(routerProps) => 
+            //   <AllNotesPage 
+            //     folders={this.state.folders}
+            //     notes={this.state.notes}
+            //     handleFolder={this.setFolder}
+            //     handleNote={this.setNote}
+            //     {...routerProps}
+            //   />}
+          />
+          <Route
+            path='/folder/:folderId'
+            component={FolderPage}
+            // render={(routerProps) =>
+            //   <FolderPage
+            //     folders={this.state.folders}
+            //     notes={this.state.notes}
+            //     handleFolder={this.setFolder}
+            //     handleNote={this.setNote}
+            //     {...routerProps}
+            //   />}
+          />
+          <Route
+            path='/note/:noteId'
+            component={NotePage}
+            // render={(routerProps) =>
+            //   <NotePage
+            //     folders={this.state.folders}
+            //     notes={this.state.notes}
+            //     handleNote={this.setNote}
+            //     {...routerProps}
+            //   />}
+          />
+        </NotefulContext.Provider>
       </main>
     )
   }

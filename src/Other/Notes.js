@@ -1,11 +1,14 @@
 import React from 'react';
 import './Notes.css';
 import NotesCard from './NotesCard';
+import NotefulContext from '../App/NotefulContext';
 
 class Notes extends React.Component {
     constructor(props) {
         super(props);
     }
+
+    static contextType = NotefulContext;
 
     render() {
 
@@ -15,7 +18,7 @@ class Notes extends React.Component {
                     key={note.id}
                     id={note.id}
                     modified={note.modified}
-                    handleNote={this.props.handleNote}/>
+                />
             });
 
         return (

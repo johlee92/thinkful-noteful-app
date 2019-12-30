@@ -1,22 +1,25 @@
 import React from 'react';
 import NotesCard from '../Other/NotesCard';
 import './NotePage.css';
+import NotefulContext from '../App/NotefulContext';
 
 class NotePage extends React.Component {
     constructor(props) {
         super(props);
     }
 
+    static contextType = NotefulContext;
+
     navigateBack = () => {
         this.props.history.push('/');
     }
 
     render() {
-        const specificNote = this.props.notes.find((note) =>
+        const specificNote = this.context.notes.find((note) =>
             note.id === this.props.match.params.noteId
         )
 
-        const specificFolder = this.props.folders.find((folder) =>
+        const specificFolder = this.context.folders.find((folder) =>
             folder.id === specificNote.folderId
         )
         
@@ -31,7 +34,7 @@ class NotePage extends React.Component {
                     key={specificNote.id}
                     id={specificNote.id}
                     modified={specificNote.modified}
-                    handleNote={this.props.handleNote}/>
+                />
                 <p>{specificNote.content}</p>
             </div>
         )

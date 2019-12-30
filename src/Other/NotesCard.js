@@ -2,11 +2,14 @@ import React from 'react';
 import './NotesCard.css';
 import {Route, Link} from 'react-router-dom';
 import Moment from 'react-moment';
+import NotefulContext from '../App/NotefulContext';
 
 class NotesCard extends React.Component {
     constructor(props) {
         super(props);
     }
+
+    static contextType = NotefulContext;
 
     render() {
         return (
@@ -14,7 +17,7 @@ class NotesCard extends React.Component {
                 className="NotesCard"
                 key={this.props.id}
                 id={this.props.id}
-                onClick={(e) => this.props.handleNote(e.target.id)}
+                onClick={(e) => this.context.setNote(e.target.id)}
             >
                 <Link to={`/note/${this.props.id}`}>
                     {this.props.name}
