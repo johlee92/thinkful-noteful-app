@@ -1,30 +1,28 @@
 import React from 'react';
 import NotesCard from '../Other/NotesCard';
-import dummyStores from '../dummy-store';
 import './NotePage.css';
 
 class NotePage extends React.Component {
     constructor(props) {
         super(props);
-        console.log(props);
     }
 
     navigateBack = () => {
-        this.props.history.goBack();
+        this.props.history.push('/');
     }
 
     render() {
-        const specificNote = dummyStores.notes.find((note) =>
+        const specificNote = this.props.notes.find((note) =>
             note.id === this.props.match.params.noteId
         )
 
-        const specificFolder = dummyStores.folders.find((folder) =>
+        const specificFolder = this.props.folders.find((folder) =>
             folder.id === specificNote.folderId
         )
         
         return (
             <div className='NotePage'>
-                <div style={{display:'inline-block'}}>
+                <div>
                     <button onClick={this.navigateBack} style={{cursor:'pointer'}}>Go Back</button>
                     <p>Folder: {specificFolder.name}</p>
                 </div>

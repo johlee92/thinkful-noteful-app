@@ -5,6 +5,7 @@ import Notes from '../Other/Notes';
 class AllNotesPage extends React.Component {
     constructor(props) {
         super(props);
+        console.log(props);
     }
 
     render() {

@@ -5,6 +5,7 @@ import FolderCard from './FolderCard';
 class Sidebar extends React.Component {
     constructor(props) {
         super(props);
+        console.log(props);
     }
 
     render() {

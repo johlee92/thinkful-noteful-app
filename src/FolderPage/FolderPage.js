@@ -1,16 +1,14 @@
 import React from 'react';
 import Sidebar from '../Other/Sidebar';
 import Notes from '../Other/Notes';
-import dummyStores from '../dummy-store';
 
 class FolderPage extends React.Component {
     constructor(props) {
         super(props);
-        console.log(props);
     }
 
     render() {
-        let folderNotes = dummyStores.notes.filter((note) => {
+        let folderNotes = this.props.notes.filter((note) => {
             return note.folderId === this.props.match.params.folderId
         })
 
