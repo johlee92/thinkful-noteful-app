@@ -2,6 +2,7 @@ import React from 'react';
 import './Notes.css';
 import NotesCard from './NotesCard';
 import NotefulContext from '../App/NotefulContext';
+import { Link } from 'react-router-dom';
 
 class Notes extends React.Component {
     constructor(props) {
@@ -24,7 +25,11 @@ class Notes extends React.Component {
         return (
             <div className="Notes">
                 {notesResult}
-                <button>Add Note</button>
+                <button>
+                    <Link to='/addnote'>
+                        Add Note
+                    </Link>
+                </button>
             </div>
         )
     }

@@ -1,0 +1,23 @@
+.addFolder {
+    width: 400px;
+    margin: 20px auto;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 1px 1px rgba(0,0,0,0.2);
+  }
+  
+  .addFolder__buttons {
+    margin-top: 5px;
+    padding: 10px;
+    text-align: right;
+  }
+  
+  .addFolder__form input, .addFolder__form textarea, .addFolder__form label {
+    display: block;
+    margin-top: 5px;
+  }
+  
+  .addFolder__form label {
+    text-align: left;
+    font-size: 0.9em;
+  }

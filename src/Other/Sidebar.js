@@ -2,6 +2,7 @@ import React from 'react';
 import './Sidebar.css';
 import FolderCard from './FolderCard';
 import NotefulContext from '../App/NotefulContext';
+import { Link } from 'react-router-dom';
 
 class Sidebar extends React.Component {
     constructor(props) {
@@ -18,7 +19,11 @@ class Sidebar extends React.Component {
         return (
             <div className="Sidebar">
                 {folder}
-                <button>Add Folder</button>
+                <button>
+                    <Link to='/addfolder'>
+                        Add Folder
+                    </Link>
+                </button>
             </div>
         )
     }

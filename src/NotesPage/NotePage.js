@@ -18,10 +18,12 @@ class NotePage extends React.Component {
         const specificNote = this.context.notes.find((note) =>
             note.id === this.props.match.params.noteId
         )
+        console.log(specificNote);
 
         const specificFolder = this.context.folders.find((folder) =>
             folder.id === specificNote.folderId
         )
+        console.log(specificFolder);
         
         return (
             <div className='NotePage'>
