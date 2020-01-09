@@ -1,5 +1,6 @@
 import React, { Component } from  'react';
 import './AddFolder.css';
+import NotefulContext from '../App/NotefulContext';
 
 class AddFolder extends Component {
   constructor(props) {
@@ -7,12 +8,20 @@ class AddFolder extends Component {
     this.state = {
       name: '',
   }
+  console.log(props);
 }
+
+static contextType = NotefulContext;
 
 nameChange = (name) => {
     this.setState({
-        name
+        name,
+        errorDisplay: 'none'
     })
+}
+
+componentDidMount() {
+  console.log(this.context);
 }
 
 handleSubmit(e) {
@@ -21,6 +30,14 @@ handleSubmit(e) {
   const folderNew = {name};
   const url ='http://localhost:9090/folders';
   
+  // correcting for where user enters 
+  if (!(folderNew.name.length>1)) {
+    this.setState({
+      errorDisplay: 'block'
+    })
+    return;
+  }
+
   const options = {
     method: 'POST',
     body: JSON.stringify(folderNew),
@@ -40,6 +57,7 @@ handleSubmit(e) {
       this.setState({
           name: ''
       });
+      this.context.dataFetch();
       this.props.history.push('/');
     })
     .catch(err => {
@@ -49,6 +67,12 @@ handleSubmit(e) {
     });
 }
 
+navigateBack = (e) => {
+  e.preventDefault();
+  this.props.history.goBack();
+}
+
+
   render() {
     return (
       <div className="addFolder">
@@ -57,8 +81,9 @@ handleSubmit(e) {
           <label htmlFor="name">Name:</label>
           <input type="text" name="name" id="name" placeholder="Name" onChange={e => this.nameChange(e.target.value)}/>
           <div className="addFolder__buttons">
-            <button onClick={() => this.props.history.push('/')}>Cancel</button>
+            <button onClick={this.navigateBack}>Cancel</button>
             <button type="submit" >Save</button>
+            <span style={{display:this.state.errorDisplay, color:'red'}}>Error</span>
           </div>  
         </form>
       </div>

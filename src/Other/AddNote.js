@@ -1,5 +1,6 @@
 import React, { Component } from  'react';
 import './AddNote.css';
+import NotefulContext from '../App/NotefulContext';
 
 class AddFolder extends Component {
   constructor(props) {
@@ -7,10 +8,12 @@ class AddFolder extends Component {
     this.state = {
         name: '',
         content: '',
-        // hardcoding folderId for now to check functionality
-        folderId: 'b07161a6-ffaf-11e8-8eb2-f2801f1b9fd1'
+        folderId: '',
+        errorDisplay: 'none'
     }
   }
+
+  static contextType = NotefulContext;
 
   nameChange = (name) => {
       this.setState({
@@ -22,6 +25,22 @@ class AddFolder extends Component {
     this.setState({
         content
     })
+  }
+
+  folderChange = (folder) => {
+    console.log(folder)
+    const desiredFolder = this.context.folders.find(f => f.name == folder);
+    console.log(desiredFolder)
+    
+    if (!desiredFolder) {
+      this.setState({
+        errorDisplay: 'block'
+      })
+    } else {
+      this.setState({
+        folderId: desiredFolder.id
+      })
+    }
   }
 
   handleSubmit(e) {
@@ -48,13 +67,17 @@ class AddFolder extends Component {
       .then(data => {
         this.setState({
             name: '',
-            content: ''
+            content: '',
+            folder: '',
+            errorDisplay: 'none'
         });
+        this.context.dataFetch();
         this.props.history.push('/');
       })
       .catch(err => {
         this.setState({
-          error: err.message
+          error: err.message,
+          errorDisplay: 'block'
         });
       });
   }
@@ -67,7 +90,8 @@ class AddFolder extends Component {
           <label htmlFor="name">Name:</label>
           <input type="text" name="name" id="name" placeholder="Name" onChange={e => this.nameChange(e.target.value)}/>
           <label htmlFor="folder">Folder:</label>
-          <input type="text" name="folder" id="folder" placeholder="Folder"/>
+          <input type="text" name="folder" id="folder" placeholder="Folder" onChange={e => this.folderChange(e.target.value)}/>
+          <span style={{display:this.state.errorDisplay, color:'red'}}>Error</span>
           <label htmlFor="content">Content:</label>
           <input type="text" name="content" id="content" placeholder="Content" onChange={e => this.contentChange(e.target.value)}/>
           <div className="addFolder__buttons">

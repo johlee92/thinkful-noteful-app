@@ -34,7 +34,8 @@ class App extends React.Component {
     })
   }
 
-  componentDidMount() {
+  dataFetch = () => {
+    console.log('fetch is firing');
     const url = 'http://localhost:9090';
     const options = {
       method: 'GET',
@@ -84,11 +85,13 @@ class App extends React.Component {
           error: err.message
         });
     });
+  }
 
+  componentDidMount() {
+    this.dataFetch();
   }
 
   render() {
-
     const contextValue = {
       folders: this.state.folders,
       notes: this.state.notes,
@@ -96,6 +99,7 @@ class App extends React.Component {
       // deleteNote: () => {},
       setFolder: this.setFolder,
       setNote: this.setNote,
+      dataFetch: this.dataFetch,
     }
 
     return(
