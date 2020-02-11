@@ -1,7 +1,6 @@
 import React from 'react';
 import Nav from '../Nav/Nav';
 import './App.css';
-import dummyStores from '../dummy-store';
 import { Route } from 'react-router-dom';
 import AllNotesPage from '../AllNotesPage/AllNotesPage';
 import FolderPage from '../FolderPage/FolderPage';
@@ -9,6 +8,7 @@ import NotePage from '../NotesPage/NotePage';
 import NotefulContext from './NotefulContext';
 import AddFolder from '../Other/AddFolder';
 import AddNote from '../Other/AddNote';
+import ErrorBoundary from '../Other/ErrorBoundary';
 
 class App extends React.Component {
   constructor(props) {
@@ -35,7 +35,6 @@ class App extends React.Component {
   }
 
   dataFetch = () => {
-    console.log('fetch is firing');
     const url = 'http://localhost:9090';
     const options = {
       method: 'GET',
@@ -91,6 +90,10 @@ class App extends React.Component {
     this.dataFetch();
   }
 
+  componentDidUpdate() {
+    console.log('component updating')
+  }
+
   render() {
     const contextValue = {
       folders: this.state.folders,
@@ -105,50 +108,52 @@ class App extends React.Component {
     return(
       <main className='App'>
         <NotefulContext.Provider value={contextValue}>
-          <Nav />
-          <Route
-            exact path ='/'
-            component={AllNotesPage}
-            // render={(routerProps) => 
-            //   <AllNotesPage 
-            //     folders={this.state.folders}
-            //     notes={this.state.notes}
-            //     handleFolder={this.setFolder}
-            //     handleNote={this.setNote}
-            //     {...routerProps}
-            //   />}
-          />
-          <Route
-            path='/folder/:folderId'
-            component={FolderPage}
-            // render={(routerProps) =>
-            //   <FolderPage
-            //     folders={this.state.folders}
-            //     notes={this.state.notes}
-            //     handleFolder={this.setFolder}
-            //     handleNote={this.setNote}
-            //     {...routerProps}
-            //   />}
-          />
-          <Route
-            path='/note/:noteId'
-            component={NotePage}
-            // render={(routerProps) =>
-            //   <NotePage
-            //     folders={this.state.folders}
-            //     notes={this.state.notes}
-            //     handleNote={this.setNote}
-            //     {...routerProps}
-            //   />}
-          />
-          <Route
-            exact path ='/addfolder'
-            component={AddFolder}
-          />
-          <Route
-            exact path ='/addnote'
-            component={AddNote}
-          />
+            <Nav />
+            <ErrorBoundary>
+              <Route
+                exact path ='/'
+                component={AllNotesPage}
+                // render={(routerProps) => 
+                //   <AllNotesPage 
+                //     folders={this.state.folders}
+                //     notes={this.state.notes}
+                //     handleFolder={this.setFolder}
+                //     handleNote={this.setNote}
+                //     {...routerProps}
+                //   />}
+              />
+              <Route
+                path='/folder/:folderId'
+                component={FolderPage}
+                // render={(routerProps) =>
+                //   <FolderPage
+                //     folders={this.state.folders}
+                //     notes={this.state.notes}
+                //     handleFolder={this.setFolder}
+                //     handleNote={this.setNote}
+                //     {...routerProps}
+                //   />}
+              />
+              <Route
+                path='/note/:noteId'
+                component={NotePage}
+                // render={(routerProps) =>
+                //   <NotePage
+                //     folders={this.state.folders}
+                //     notes={this.state.notes}
+                //     handleNote={this.setNote}
+                //     {...routerProps}
+                //   />}
+              />
+              <Route
+                exact path ='/addfolder'
+                component={AddFolder}
+              />
+              <Route
+                exact path ='/addnote'
+                component={AddNote}
+              />
+            </ErrorBoundary>
         </NotefulContext.Provider>
       </main>
     )

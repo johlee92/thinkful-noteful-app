@@ -7,6 +7,7 @@ class AddFolder extends Component {
     super(props);
     this.state = {
       name: '',
+      errorMessage: '',
   }
   console.log(props);
 }
@@ -33,7 +34,8 @@ handleSubmit(e) {
   // correcting for where user enters 
   if (!(folderNew.name.length>1)) {
     this.setState({
-      errorDisplay: 'block'
+      errorDisplay: 'block',
+      errorMessage: 'folder name must be longer than 1 character'
     })
     return;
   }
@@ -83,7 +85,7 @@ navigateBack = (e) => {
           <div className="addFolder__buttons">
             <button onClick={this.navigateBack}>Cancel</button>
             <button type="submit" >Save</button>
-            <span style={{display:this.state.errorDisplay, color:'red'}}>Error</span>
+            <span style={{display:this.state.errorDisplay, color:'red'}}>{this.state.errorMessage}</span>
           </div>  
         </form>
       </div>

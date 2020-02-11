@@ -8,6 +8,7 @@ const NotefulContext = React.createContext({
   setFolder: () => {},
   setNote: () => {},
   dataFetch: () => {},
+  pushLinkRefresh: () => {},
 })
 
 export default NotefulContext

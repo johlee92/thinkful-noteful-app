@@ -6,6 +6,7 @@ import NotefulContext from '../App/NotefulContext';
 class NotePage extends React.Component {
     constructor(props) {
         super(props);
+        console.log(props);
     }
 
     static contextType = NotefulContext;
@@ -36,6 +37,7 @@ class NotePage extends React.Component {
                     key={specificNote.id}
                     id={specificNote.id}
                     modified={specificNote.modified}
+                    navigateBack={this.navigateBack}
                 />
                 <p>{specificNote.content}</p>
             </div>

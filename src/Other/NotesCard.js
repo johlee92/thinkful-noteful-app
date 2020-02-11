@@ -30,8 +30,9 @@ class NotesCard extends React.Component {
             return res.json();
           })
           .then(data => {
-            console.log(data);
-            this.props.history.push('/');
+            //navigating back to home page by passing over props function from parent
+            this.props.navigateBack();
+            this.context.dataFetch();
           })
           .catch(err => {
             this.setState({
@@ -46,8 +47,6 @@ class NotesCard extends React.Component {
                 className="NotesCard"
                 key={this.props.id}
                 id={this.props.id}
-                // What is this code?
-                // onClick={(e) => this.context.setNote(e.target.id)}
             >
                 <Link to={`/note/${this.props.id}`}>
                     {this.props.name}
