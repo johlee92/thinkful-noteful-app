@@ -32,13 +32,13 @@ class NotesCard extends React.Component {
           .then(data => {
             //navigating back to home page by passing over props function from parent
             this.props.navigateBack();
-            this.context.dataFetch();
           })
           .catch(err => {
             this.setState({
               error: err.message
             });
           });
+          this.context.dataFetch();
       }
 
     render() {

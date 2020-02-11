@@ -90,10 +90,6 @@ class App extends React.Component {
     this.dataFetch();
   }
 
-  componentDidUpdate() {
-    console.log('component updating')
-  }
-
   render() {
     const contextValue = {
       folders: this.state.folders,
