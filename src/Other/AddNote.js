@@ -49,7 +49,7 @@ class AddFolder extends Component {
     if (!desiredFolder) {
       this.setState({
         errorDisplay: 'block',
-        errorMessage: 'folder does not exist'
+        errorMessage: 'Folder does not exist'
       })
     } else {
       this.setState({
@@ -62,16 +62,19 @@ class AddFolder extends Component {
   handleSubmit(e) {
     e.preventDefault();
     
-    //figure out a better way to validate this piece
-    try {
-      if (this.state.errorDisplay === 'block') {
-        const oldErrorMessage = this.state.errorMessage;
-        throw new Error(`Please correct submit form errors: ${oldErrorMessage}`);
-      }
-    }
-    catch (err) {
+    if (!(e.target.folder.value.length>1)) {
       this.setState({
-        errorMessage: err.message,
+        errorDisplay: 'block',
+        errorMessage: 'Must provide an existing folder name'
+      })
+      return;
+    }
+
+    if (this.state.errorDisplay === 'block') {
+      const oldErrorMessage = this.state.errorMessage;
+      console.log(oldErrorMessage);
+      this.setState({
+        errorMessage: `${oldErrorMessage}`,
         errorDisplay: 'block'
       });
       return;
