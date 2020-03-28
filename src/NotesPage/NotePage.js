@@ -6,7 +6,6 @@ import NotefulContext from '../App/NotefulContext';
 class NotePage extends React.Component {
     constructor(props) {
         super(props);
-        console.log(props);
     }
 
     static contextType = NotefulContext;
@@ -16,15 +15,24 @@ class NotePage extends React.Component {
     }
 
     render() {
-        const specificNote = this.context.notes.find((note) =>
-            note.id === this.props.match.params.noteId
-        )
-        console.log(specificNote);
+        let specificNote;
+        let specificFolder;
 
-        const specificFolder = this.context.folders.find((folder) =>
-            folder.id === specificNote.folderId
-        )
-        console.log(specificFolder);
+        // if (typeof this.context.note[0].id === 'number') {
+            specificNote = this.context.notes.find((note) =>
+                note.id === parseInt(this.props.match.params.noteId, 10)
+            )
+            specificFolder = this.context.folders.find((folder) =>
+                folder.id === parseInt(specificNote.folderId, 10)
+            )
+        // } else {
+        //     specificNote = this.context.notes.find((note) =>
+        //         note.id === this.props.match.params.noteId
+        //     )
+        //     specificFolder = this.context.folders.find((folder) =>
+        //         folder.id === specificNote.folderId
+        //     )
+        // }
         
         return (
             <div className='NotePage'>

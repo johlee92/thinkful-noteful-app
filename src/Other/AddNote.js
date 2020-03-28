@@ -1,6 +1,7 @@
 import React, { Component } from  'react';
 import './AddNote.css';
 import NotefulContext from '../App/NotefulContext';
+import config from '../config';
 
 class AddFolder extends Component {
 
@@ -9,7 +10,7 @@ class AddFolder extends Component {
     this.state = {
         name: '',
         content: '',
-        folderId: '',
+        folderid: '',
         errorDisplay: 'none',
         errorMessage: ''
     }
@@ -54,7 +55,7 @@ class AddFolder extends Component {
     } else {
       this.setState({
         errorDisplay: 'none',
-        folderId: desiredFolder.id
+        folderid: desiredFolder.id
       })
     }
   }
@@ -80,9 +81,9 @@ class AddFolder extends Component {
       return;
     }
 
-    const {name, content, folderId} = this.state;
-    const noteNew = {name, content, folderId};
-    const url ='http://localhost:9090/notes';
+    const {name, content, folderid} = this.state;
+    const noteNew = {name, content, folderid};
+    const url = `${config.API_ENDPOINT}` + '/notes';
 
     const options = {
       method: 'POST',

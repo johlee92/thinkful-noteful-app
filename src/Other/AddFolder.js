@@ -1,6 +1,7 @@
 import React, { Component } from  'react';
 import './AddFolder.css';
 import NotefulContext from '../App/NotefulContext';
+import config from '../config';
 
 class AddFolder extends Component {
   constructor(props) {
@@ -29,7 +30,7 @@ handleSubmit(e) {
   e.preventDefault();
   const {name} = this.state;
   const folderNew = {name};
-  const url ='http://localhost:9090/folders';
+  const url = `${config.API_ENDPOINT}` + '/folders';
   
   // correcting for where user enters 
   if (!(folderNew.name.length>1)) {

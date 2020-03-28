@@ -3,6 +3,7 @@ import './NotesCard.css';
 import {Route, Link} from 'react-router-dom';
 import Moment from 'react-moment';
 import NotefulContext from '../App/NotefulContext';
+import config from '../config';
 
 class NotesCard extends React.Component {
     constructor(props) {
@@ -14,7 +15,7 @@ class NotesCard extends React.Component {
     handleDelete(e, target) {
         e.preventDefault();
 
-        const url ='http://localhost:9090/notes';
+        const url = `${config.API_ENDPOINT}`;
         const options = {
           method: 'DELETE',
           headers: {
@@ -22,7 +23,7 @@ class NotesCard extends React.Component {
           }
         };
 
-        fetch(url+'/'+target, options)
+        fetch(url+'/notes/'+target, options)
           .then(res => {
             if(!res.ok) {
               throw new Error('Something went wrong, please try again later');
@@ -30,6 +31,7 @@ class NotesCard extends React.Component {
             return res.json();
           })
           .then(data => {
+            console.log(data)
             //navigating back to home page by passing over props function from parent
             this.props.navigateBack();
           })

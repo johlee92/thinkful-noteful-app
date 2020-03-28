@@ -9,6 +9,7 @@ import NotefulContext from './NotefulContext';
 import AddFolder from '../Other/AddFolder';
 import AddNote from '../Other/AddNote';
 import ErrorBoundary from '../Other/ErrorBoundary';
+import config from '../config';
 
 class App extends React.Component {
   constructor(props) {
@@ -35,7 +36,7 @@ class App extends React.Component {
   }
 
   dataFetch = () => {
-    const url = 'http://localhost:9090';
+    const url = `${config.API_ENDPOINT}`;
     const options = {
       method: 'GET',
       headers: {
