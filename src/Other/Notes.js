@@ -11,6 +11,10 @@ class Notes extends React.Component {
 
     static contextType = NotefulContext;
 
+    navigateBack = () => {
+        this.props.history.push('/');
+    }
+
     render() {
 
         let notesResult = this.props.notes.map((note) => {
@@ -19,6 +23,7 @@ class Notes extends React.Component {
                     key={note.id}
                     id={note.id}
                     modified={note.modified}
+                    navigateBack={this.navigateBack}
                 />
             });
 

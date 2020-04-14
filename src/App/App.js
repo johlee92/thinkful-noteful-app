@@ -55,6 +55,7 @@ class App extends React.Component {
       })
       .then(res => res.json())
       .then(data => {
+        console.log(data)
         this.setState({
           notes: data,
           error: null

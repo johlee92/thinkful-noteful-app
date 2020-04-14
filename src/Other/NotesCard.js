@@ -28,19 +28,18 @@ class NotesCard extends React.Component {
             if(!res.ok) {
               throw new Error('Something went wrong, please try again later');
             }
-            return res.json();
+            return res;
           })
-          .then(data => {
-            console.log(data)
-            //navigating back to home page by passing over props function from parent
-            this.props.navigateBack();
+          .then(res => {
+            this.props.navigateBack()
+            this.context.dataFetch();
           })
           .catch(err => {
+            this.context.dataFetch();
             this.setState({
               error: err.message
             });
           });
-          this.context.dataFetch();
       }
 
     render() {
